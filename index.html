@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #first {
+            color: green;
+        }
+
+        #second {
+            color: red;
+        }
+    </style>
+    <script>
+        /*
+        Tool box
+        */
+
+        // Chapt 3
+        // callback set (no duplicate functions)
+        var store = {
+            nextId: 1,
+            cache: {},
+            add: function (fn) {
+                if (!fn.id) {
+                    fn.id = this.next++;
+                    this.cache[fn.id] = fn;
+                    return true;
+                }
+            }
+        };
+        //example
+        function ninja() { };
+        store.add(ninja); // successfully added, return  true
+        store.add(ninja); // duplicate will not return true
+
+
+        // cache function
+        function cache(param) {
+            if (!cache.answers) {
+                cache.answers = {};
+            }
+            if (cache.answers[param] !== undefined) {
+                return cache.answers[param];
+            }
+            return param * 8989 + 9000; // can be complex arithmetic
+        }
+
+
+    </script>
+    <script>
+        var values = [];
+        for (var i = 0; i < 10; i++) {
+            values.push(
+                [i * (-19), i]
+            );
+        };
+        values.sort(function (value1, value2) {
+            return value1[0] - value2[0];
+        });
+        alert(values)
+    </script>
+</head>
+
+<body>
+    <ul id="first">
+
+    </ul>
+    <script>
+        function addMessage(element, message) {
+            var msg = document.createElement('li');
+            msg.textContent = message;
+            element.appendChild(msg);
+        }
+        var first = document.getElementById('first');
+        addMessage(first, "page message");
+    </script>
+    <ul id="second">
+
+    </ul>
+    <script>
+        document.body.addEventListener('mousemove', function () {
+            var second = document.getElementById('second');
+            addMessage(second, 'Event: mousemove')
+        });
+
+        document.body.addEventListener('click', function () {
+            var second = document.getElementById('second');
+            addMessage(second, 'Event: click');
+        });
+
+
+    </script>
+
+</body>
+
+</html>
